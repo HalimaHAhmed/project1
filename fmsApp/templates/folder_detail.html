@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>{{folder.name}} | detail</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <i class="{{ folder.icon }}"></i>
+                <h1>{{folder.name}}</h1>
+                <a href="{% url 'update_folder' pk=folder.id %}">Add Folder</a>
+                <div class="form-group">
+                    <h1>List of files {{ files.count }}</h1>
+                    <div class="form-group">
+                        <div class="form-control">
+                            <a href="{% url 'upload_file' pk=folder.id %}">Upload File</a>
+                        </div>
+                        </div>
+                    <table>
+                        <thead style="background-color: black; color: white">
+                            <tr>
+                                <th>User</th>
+                                <th>Folder Name</th>
+                                <th>File name</th>
+                                <th>File Path</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% for file in files %}
+                                <tr>
+                                    <td>{{file.folder.user.username}}</td>
+                                    <td>{{ file.folder.name }}</td>
+                                    <td>{{ file.name }}</td>
+                                    <td><a href="{{ file.file.url }}" download>{{file.name}}</a></td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
